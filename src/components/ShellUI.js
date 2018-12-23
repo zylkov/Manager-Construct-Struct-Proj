@@ -9,6 +9,8 @@ import IconButton from '@material-ui/core/IconButton';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import Add from '@material-ui/icons/Add'
 
+import DialogAddProj from '../components/DialogAddProj'
+
 const styles = theme => ({
   appBar: {
     position: 'relative',
@@ -38,6 +40,7 @@ function ShellUI(props) {
   return (
     <React.Fragment>
       <CssBaseline />
+      <DialogAddProj open={false}/>
       <div className={classes.root}>
         <AppBar position="static" className={classes.appBar}>
             <Toolbar>
