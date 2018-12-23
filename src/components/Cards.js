@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
+import LinearProgress from '@material-ui/core/LinearProgress';
 
 import MyCard from './MyCard'
 
@@ -11,7 +12,7 @@ const styles = theme => ({
   layout: {
     width: 'auto',
     marginLeft: theme.spacing.unit * 2,
-    marginRight: theme.spacing.unit * 2,
+    marginRight: theme.spacing.unit * 2
     
   },
   cardGrid: {
@@ -22,11 +23,15 @@ const styles = theme => ({
 
 
 function Cards(props) {
-  const { classes, cards } = props;
+  const { classes, cards, isLoading } = props;
 
   return (
     <React.Fragment>
       <CssBaseline />
+
+      { isLoading ? 
+        <LinearProgress/>
+        :
         <div className={classNames(classes.layout, classes.cardGrid)}>
           {/* End hero unit */}
           <Grid container spacing={40}>
@@ -37,13 +42,15 @@ function Cards(props) {
             ))}
           </Grid>
         </div>
+      }
     </React.Fragment>
   );
 }
 
 Cards.propTypes = {
   classes: PropTypes.object.isRequired,
-  cards: PropTypes.array.isRequired
+  cards: PropTypes.array.isRequired,
+  isLoading: PropTypes.bool.isRequired,
 
 };
 

@@ -29,7 +29,7 @@ class App extends Component {
   render() {
     return (
      <ShellUI title="Проекты" add={true}>
-       <Cards cards={this.state.cards}/>
+       <Cards cards={this.state.cards} isLoading={false}/>
      </ShellUI> 
     )
   }
