@@ -22,7 +22,7 @@ class App extends Component {
       <React.Fragment>
         
       <DialogAddProj open={ui.openDialogAddProj} onCloseDialog={onClickAdd}/>
-      <ShellUI title="Проекты" addAction={onClickAdd}>
+      <ShellUI addAction={onClickAdd}>
       {
         cards.isLoading ?
         <LinearProgress/>:

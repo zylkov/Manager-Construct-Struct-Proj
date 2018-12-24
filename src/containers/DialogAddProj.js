@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux'
+import {addCard} from '../actions/CardsActions'
 
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -10,7 +12,15 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
 function DialogAddProj(props) {
-    const {open, onCloseDialog} = props
+    const {open, onCloseDialog, addCardAction} = props
+    let nameInput = React.createRef()
+    let discriptionInput = React.createRef()
+
+    function addClick(){
+      //addCardAction(nameInput.value, discriptionInput.value)
+      console.log(nameInput.input.value)
+    }
+
     return (
     <Dialog
         open={open}
@@ -24,6 +34,7 @@ function DialogAddProj(props) {
             Введите параметры проекта
           </DialogContentText>
           <TextField
+            ref={nameInput}
             autoFocus
             margin="dense"
             id="name"
@@ -32,6 +43,7 @@ function DialogAddProj(props) {
             fullWidth
           />
           <TextField
+            ref={discriptionInput}
             variant="outlined"
             margin="dense"
             id="name"
@@ -47,7 +59,7 @@ function DialogAddProj(props) {
           <Button onClick={()=> onCloseDialog()} color="primary">
             Отмена
           </Button>
-          <Button onClick={()=> onCloseDialog()} color="primary">
+          <Button onClick={addClick} color="primary">
             Добавить
           </Button>
         </DialogActions>
@@ -60,4 +72,10 @@ DialogAddProj.propTypes = {
     onCloseDialog: PropTypes.func.isRequired
 }
 
-export default DialogAddProj
+const mapDispatchToProps = dispatch =>{
+  return{
+    addCardAction: (name,discription) => dispatch(addCard(name,discription))
+  }
+}
+
+export default connect(null,mapDispatchToProps)(DialogAddProj)
