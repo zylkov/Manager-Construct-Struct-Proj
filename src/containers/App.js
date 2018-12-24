@@ -1,38 +1,38 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux'
+
 import Cards from '../components/Cards'
 import ShellUI from '../components/ShellUI'
 
+import {getCards} from '../actions/CardsActions'
 
 class App extends Component {
-  constructor(props){
-    super(props)
-    this.state = {
-      cards:[
-        {
-          id:1,
-          name:"Проект 1",
-          discription:"Вообще кул проект отвечаю"
-        },
-        {
-          id:2,
-          name:"Проект 2",
-          discription:"Да нет вот этот самый наилудщий"
-        },
-        {
-          id:3,
-          name:"Проект 3",
-          discription:"В кратце - круть"
-        },
-      ]
-    }
+  componentDidMount(){
+    this.props.getCardsAction()
   }
+
   render() {
+    const {cards, ui} = this.props
     return (
      <ShellUI title="Проекты" add={true}>
-       <Cards cards={this.state.cards} isLoading={false}/>
+       <Cards cards={cards.cards} isLoading={cards.isLoading}/>
      </ShellUI> 
     )
   }
 }
 
-export default App;
+const mapStateToProps = store => {
+  console.log(store)
+  return{
+    cards: store.cards,
+    ui: store.ui
+  }
+}
+
+const mapDispatchToProps = dispatch =>{
+  return{
+    getCardsAction: () => dispatch(getCards())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
