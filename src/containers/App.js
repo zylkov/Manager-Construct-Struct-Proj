@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import Cards from '../components/Cards'
 import ShellUI from './ShellUI'
 import DialogAddProj from './DialogAddProj'
+import LinearProgress from '@material-ui/core/LinearProgress';
 
 import {getCards} from '../actions/CardsActions'
 import {clickDialogAddProj, setUi} from '../actions/UiActions'
@@ -22,7 +23,12 @@ class App extends Component {
         
       <DialogAddProj open={ui.openDialogAddProj} onCloseDialog={onClickAdd}/>
       <ShellUI title="Проекты" addAction={onClickAdd}>
-        <Cards cards={cards.cards} isLoading={cards.isLoading}/>
+      {
+        cards.isLoading ?
+        <LinearProgress/>:
+        ''
+      }
+        <Cards cards={cards.cards}/>
       </ShellUI> 
      </React.Fragment>
     )

@@ -23,15 +23,13 @@ const styles = theme => ({
 
 
 function Cards(props) {
-  const { classes, cards, isLoading } = props;
+  const { classes, cards } = props;
 
   return (
     <React.Fragment>
       <CssBaseline />
 
-      { isLoading ? 
-        <LinearProgress/>
-        :
+
         <div className={classNames(classes.layout, classes.cardGrid)}>
           {/* End hero unit */}
           <Grid container spacing={40}>
@@ -42,7 +40,6 @@ function Cards(props) {
             ))}
           </Grid>
         </div>
-      }
     </React.Fragment>
   );
 }
@@ -50,7 +47,6 @@ function Cards(props) {
 Cards.propTypes = {
   classes: PropTypes.object.isRequired,
   cards: PropTypes.array.isRequired,
-  isLoading: PropTypes.bool.isRequired,
 
 };
 
