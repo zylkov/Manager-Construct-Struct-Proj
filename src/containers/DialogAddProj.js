@@ -10,12 +10,11 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
 function DialogAddProj(props) {
-    const {open} = props
-    const onClose = () => {console.log("Диалог закрылся")}
+    const {open, onCloseDialog} = props
     return (
     <Dialog
         open={open}
-        onClose={onClose()}
+        onClose={()=> onCloseDialog()}
         aria-labelledby="form-dialog-title"
         fullWidth
     >
@@ -45,10 +44,10 @@ function DialogAddProj(props) {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={onClose()} color="primary">
+          <Button onClick={()=> onCloseDialog()} color="primary">
             Отмена
           </Button>
-          <Button onClick={onClose()} color="primary">
+          <Button onClick={()=> onCloseDialog()} color="primary">
             Добавить
           </Button>
         </DialogActions>
@@ -57,7 +56,8 @@ function DialogAddProj(props) {
 }
 
 DialogAddProj.propTypes = {
-    open: PropTypes.bool.isRequired
+    open: PropTypes.bool.isRequired,
+    onCloseDialog: PropTypes.func.isRequired
 }
 
 export default DialogAddProj
