@@ -8,8 +8,9 @@ import { withStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import Add from '@material-ui/icons/Add'
+import Back from '@material-ui/icons/KeyboardBackspace'
 
-import DialogAddProj from '../components/DialogAddProj'
+import DialogAddProj from '../containers/DialogAddProj'
 
 const styles = theme => ({
   appBar: {
@@ -35,21 +36,22 @@ const styles = theme => ({
 
 
 function ShellUI(props) {
-  const { classes, children, title, add } = props;
+  const { classes, children, title, add, addAction } = props;
 
   return (
     <React.Fragment>
       <CssBaseline />
-      <DialogAddProj open={false}/>
       <div className={classes.root}>
         <AppBar position="static" className={classes.appBar}>
             <Toolbar>
-            
+            <IconButton color="inherit" >
+                <Back />
+            </IconButton>
             <Typography variant="h6" color="inherit"  className={classes.grow}>
                 {title}
             </Typography>
             { add ?
-                <IconButton color="inherit">
+                <IconButton color="inherit" onClick={()=>addAction()}>
                     <Add />
                 </IconButton>
                 : ""
@@ -72,6 +74,7 @@ ShellUI.propTypes = {
   classes: PropTypes.object.isRequired,
   title: PropTypes.string.isRequired,
   add:PropTypes.bool,
+  addAction:PropTypes.func.isRequired,
 };
 
 export default withStyles(styles)(ShellUI);

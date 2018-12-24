@@ -3,8 +3,10 @@ import {connect} from 'react-redux'
 
 import Cards from '../components/Cards'
 import ShellUI from '../components/ShellUI'
+import DialogAddProj from './DialogAddProj'
 
 import {getCards} from '../actions/CardsActions'
+import {clickDialogAddProj} from '../actions/UiActions'
 
 class App extends Component {
   componentDidMount(){
@@ -12,11 +14,16 @@ class App extends Component {
   }
 
   render() {
-    const {cards, ui} = this.props
+    const {cards, ui, clickDialogAddProjAction} = this.props
+    const onClickAdd = () => clickDialogAddProjAction(ui.openDialogAddProj)
     return (
-     <ShellUI title="Проекты" add={true}>
-       <Cards cards={cards.cards} isLoading={cards.isLoading}/>
-     </ShellUI> 
+      <React.Fragment>
+        
+      <DialogAddProj open={ui.openDialogAddProj} onCloseDialog={onClickAdd}/>
+      <ShellUI title="Проекты" add={true} addAction={onClickAdd} addShow={true}>
+        <Cards cards={cards.cards} isLoading={cards.isLoading}/>
+      </ShellUI> 
+     </React.Fragment>
     )
   }
 }
@@ -31,7 +38,8 @@ const mapStateToProps = store => {
 
 const mapDispatchToProps = dispatch =>{
   return{
-    getCardsAction: () => dispatch(getCards())
+    getCardsAction: () => dispatch(getCards()),
+    clickDialogAddProjAction: (show) => dispatch(clickDialogAddProj(show))
   }
 }
 
