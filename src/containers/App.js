@@ -2,15 +2,16 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux'
 
 import Cards from '../components/Cards'
-import ShellUI from '../components/ShellUI'
+import ShellUI from './ShellUI'
 import DialogAddProj from './DialogAddProj'
 
 import {getCards} from '../actions/CardsActions'
-import {clickDialogAddProj} from '../actions/UiActions'
+import {clickDialogAddProj, setUi} from '../actions/UiActions'
 
 class App extends Component {
   componentDidMount(){
     this.props.getCardsAction()
+    this.props.setUiAction("Проекты",false,"",true)
   }
 
   render() {
@@ -20,7 +21,7 @@ class App extends Component {
       <React.Fragment>
         
       <DialogAddProj open={ui.openDialogAddProj} onCloseDialog={onClickAdd}/>
-      <ShellUI title="Проекты" add={true} addAction={onClickAdd} addShow={true}>
+      <ShellUI title="Проекты" addAction={onClickAdd}>
         <Cards cards={cards.cards} isLoading={cards.isLoading}/>
       </ShellUI> 
      </React.Fragment>
@@ -39,7 +40,8 @@ const mapStateToProps = store => {
 const mapDispatchToProps = dispatch =>{
   return{
     getCardsAction: () => dispatch(getCards()),
-    clickDialogAddProjAction: (show) => dispatch(clickDialogAddProj(show))
+    clickDialogAddProjAction: (show) => dispatch(clickDialogAddProj(show)),
+    setUiAction: (title,backButton,backButtonLink,addButton) => dispatch(setUi(title,backButton,backButtonLink,addButton))
   }
 }
 

@@ -10,7 +10,9 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import Add from '@material-ui/icons/Add'
 import Back from '@material-ui/icons/KeyboardBackspace'
 
-import DialogAddProj from '../containers/DialogAddProj'
+import {connect} from 'react-redux'
+
+import DialogAddProj from './DialogAddProj'
 
 const styles = theme => ({
   appBar: {
@@ -36,7 +38,7 @@ const styles = theme => ({
 
 
 function ShellUI(props) {
-  const { classes, children, title, add, addAction } = props;
+  const { classes, children, addAction, ui } = props;
 
   return (
     <React.Fragment>
@@ -44,13 +46,17 @@ function ShellUI(props) {
       <div className={classes.root}>
         <AppBar position="static" className={classes.appBar}>
             <Toolbar>
-            <IconButton color="inherit" >
-                <Back />
-            </IconButton>
+              {
+                ui.backButton ?
+                <IconButton color="inherit" >
+                  <Back />
+                </IconButton>
+                :""
+              }
             <Typography variant="h6" color="inherit"  className={classes.grow}>
-                {title}
+                {ui.title}
             </Typography>
-            { add ?
+            { ui.addButton ?
                 <IconButton color="inherit" onClick={()=>addAction()}>
                     <Add />
                 </IconButton>
@@ -77,4 +83,13 @@ ShellUI.propTypes = {
   addAction:PropTypes.func.isRequired,
 };
 
-export default withStyles(styles)(ShellUI);
+const mapStateToProps = store => {
+  return{
+    ui: store.ui
+  }
+}
+
+
+export default withStyles(styles)(
+  connect(mapStateToProps)(ShellUI)
+  );
