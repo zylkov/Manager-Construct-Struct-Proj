@@ -17,7 +17,7 @@ class App extends Component {
 
   render() {
     const {cards, ui, clickDialogAddProjAction} = this.props
-    const onClickAdd = () => clickDialogAddProjAction(ui.openDialogAddProj)
+    const onClickAdd = () => clickDialogAddProjAction()
     return (
       <React.Fragment>
         

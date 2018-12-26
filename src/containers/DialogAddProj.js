@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux'
 import {addCard} from '../actions/CardsActions'
+import {setBufferDialog, clearBufferDialog} from '../actions/UiActions'
 
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -12,13 +13,23 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
 function DialogAddProj(props) {
-    const {open, onCloseDialog, addCardAction} = props
-    let nameInput = React.createRef()
-    let discriptionInput = React.createRef()
+    const {ui, 
+          open, 
+          onCloseDialog, 
+          addCardAction, 
+          setBufferDialogAction, 
+          clearBufferDialogAction} = props
 
     function addClick(){
-      //addCardAction(nameInput.value, discriptionInput.value)
-      console.log(nameInput.input.value)
+      addCardAction(ui.bufferDialog.name, ui.bufferDialog.discription)
+      clearBufferDialogAction()
+      onCloseDialog()
+      
+    }
+
+    function inputChange(e){
+      const { target: { id, value } } = e;
+      setBufferDialogAction(id,value)
     }
 
     return (
@@ -34,23 +45,23 @@ function DialogAddProj(props) {
             Введите параметры проекта
           </DialogContentText>
           <TextField
-            ref={nameInput}
             autoFocus
             margin="dense"
             id="name"
             label="Название"
             type="text"
+            onChange={inputChange}
             fullWidth
           />
           <TextField
-            ref={discriptionInput}
             variant="outlined"
             margin="dense"
-            id="name"
+            id="discription"
             label="Описание"
             type="text"
             rows={3}
             rowsMax={5}
+            onChange={inputChange}
             fullWidth
             multiline
           />
@@ -72,10 +83,19 @@ DialogAddProj.propTypes = {
     onCloseDialog: PropTypes.func.isRequired
 }
 
-const mapDispatchToProps = dispatch =>{
+const mapStateToProps = store => {
+  console.log(store)
   return{
-    addCardAction: (name,discription) => dispatch(addCard(name,discription))
+    ui: store.ui
   }
 }
 
-export default connect(null,mapDispatchToProps)(DialogAddProj)
+const mapDispatchToProps = dispatch =>{
+  return{
+    addCardAction: (name,discription) => dispatch(addCard(name,discription)),
+    setBufferDialogAction : (id, data) => dispatch(setBufferDialog(id,data)),
+    clearBufferDialogAction : () => dispatch(clearBufferDialog())
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(DialogAddProj)

@@ -12,7 +12,6 @@ import Back from '@material-ui/icons/KeyboardBackspace'
 
 import {connect} from 'react-redux'
 
-import DialogAddProj from './DialogAddProj'
 
 const styles = theme => ({
   appBar: {
