@@ -2,6 +2,29 @@ export const CLICK_DIALOG_ADD_PROJ = "CLICK_DIALOG_ADD_PROJ"
 export const SET_UI = "SET_MENU"
 export const SET_BUFFER_DIALOG = "SET_BUFFER_DIALOG"
 export const CLEAR_BUFFER_DIALOG = "CLEAR_BUFFER_DIALOG"
+export const CHEAK_DIALOG_DATA = "CHEAK_DIALOG_DATA"
+export const CLEAR_ERROR_DIALOG = "CLEAR_ERROR_DIALOG"
+
+export function clearErrorDialog(){
+    return dispatch =>{
+        dispatch({
+            type: CLEAR_ERROR_DIALOG
+        })
+    }
+}
+
+export function cheackDialogData(idData,funcheacker, errorText){
+    return dispatch =>{
+        dispatch({
+            type: CHEAK_DIALOG_DATA,
+            payload:{
+                id:idData,
+                cheaker: funcheacker,
+                errorText
+            }
+        })
+    }
+}
 
 export function clickDialogAddProj(show){
     return dispatch =>{

@@ -47,6 +47,7 @@ export function addCard(name,discription){
             type: ADD_CARD_REQUST
         })
 
+        
         setTimeout(()=>{
             dispatch({
                 type: ADD_CARD_SUCCESS,

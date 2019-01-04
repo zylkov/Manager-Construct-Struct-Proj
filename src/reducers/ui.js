@@ -1,7 +1,9 @@
 import {CLICK_DIALOG_ADD_PROJ, 
         SET_UI, 
         SET_BUFFER_DIALOG,
-        CLEAR_BUFFER_DIALOG} from '../actions/UiActions'
+        CLEAR_BUFFER_DIALOG,
+        CHEAK_DIALOG_DATA,
+        CLEAR_ERROR_DIALOG} from '../actions/UiActions'
 
 const initialState = {
     title:"Название",
@@ -9,11 +11,19 @@ const initialState = {
     backButtonLink:"",
     addButton:false,
     openDialogAddProj: false,
-    bufferDialog:{}
+    bufferDialog:{},
+    errorDialog:{}
 }
 
 export function uiReducer(state=initialState, action){
     switch(action.type){
+        case CHEAK_DIALOG_DATA:
+            return{
+                ...state,
+                errorDialog: Object.assign({}, state.errorDialog,
+                    action.payload.cheaker(state.bufferDialog[action.payload.id]) ? 
+                    {[action.payload.id] : action.payload.errorText} : {})
+            }
         case CLICK_DIALOG_ADD_PROJ:
             return{
                 ...state,
@@ -35,10 +45,15 @@ export function uiReducer(state=initialState, action){
                 ...state,
                 bufferDialog:Object.assign({},state.bufferDialog,{[action.payload.id]:action.payload.data})
             }
+        case CLEAR_ERROR_DIALOG:
+            return{
+                ...state,
+                errorDialog:{}
+            }
         case CLEAR_BUFFER_DIALOG:
             return{
                 ...state,
-                bufferDialog:[]
+                bufferDialog:{}
             }
         default:
             return state
