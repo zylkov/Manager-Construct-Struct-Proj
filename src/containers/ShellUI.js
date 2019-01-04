@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -36,43 +36,45 @@ const styles = theme => ({
 
 
 
-function ShellUI(props) {
-  const { classes, children, addAction, ui } = props;
+class ShellUI extends Component {
+  render(){
+    const { classes, children, addAction, ui } = this.props;
 
-  return (
-    <React.Fragment>
-      <CssBaseline />
-      <div className={classes.root}>
-        <AppBar position="static" className={classes.appBar}>
-            <Toolbar>
-              {
-                ui.backButton ?
-                <IconButton color="inherit" >
-                  <Back />
-                </IconButton>
-                :""
+    return (
+      <React.Fragment>
+        <CssBaseline />
+        <div className={classes.root}>
+          <AppBar position="static" className={classes.appBar}>
+              <Toolbar>
+                {
+                  ui.backButton ?
+                  <IconButton color="inherit" >
+                    <Back />
+                  </IconButton>
+                  :""
+                }
+              <Typography variant="h6" color="inherit"  className={classes.grow}>
+                  {ui.title}
+              </Typography>
+              { ui.addButton ?
+                  <IconButton color="inherit" onClick={()=>addAction()}>
+                      <Add />
+                  </IconButton>
+                  : ""
+
               }
-            <Typography variant="h6" color="inherit"  className={classes.grow}>
-                {ui.title}
-            </Typography>
-            { ui.addButton ?
-                <IconButton color="inherit" onClick={()=>addAction()}>
-                    <Add />
-                </IconButton>
-                : ""
-
-            }
-            <IconButton color="inherit" >
-                <AccountCircle />
-            </IconButton>
-            </Toolbar>
-        </AppBar>
-      </div>
-      <main>
-        {children}
-      </main>
-    </React.Fragment>
-  );
+              <IconButton color="inherit" >
+                  <AccountCircle />
+              </IconButton>
+              </Toolbar>
+          </AppBar>
+        </div>
+        <main>
+          {children}
+        </main>
+      </React.Fragment>
+    );
+  }
 }
 
 ShellUI.propTypes = {
