@@ -2,7 +2,7 @@ export const GET_PROJECT_REQUST = "GET_PROJECT_REQUST"
 export const GET_PROJECT_SUCCESS = "GET_PROJECT_SUCCESS"
 export const GET_PROJECT_FAIL = "GET_PROJECT_FAIL"
 
-export function getCards(){
+export function getProject(){
     return dispatch =>{
         dispatch({
             type: GET_PROJECT_REQUST
