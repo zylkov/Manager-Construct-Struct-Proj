@@ -9,7 +9,7 @@ import LinearProgress from '@material-ui/core/LinearProgress';
 import {getCards} from '../actions/CardsActions'
 import {clickDialogAddProj, setUi} from '../actions/UiActions'
 
-class App extends Component {
+class PageGallery extends Component {
   componentDidMount(){
     this.props.getCardsAction()
     this.props.setUiAction("Проекты",false,"",true)
@@ -51,4 +51,4 @@ const mapDispatchToProps = dispatch =>{
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(PageGallery);
