@@ -6,7 +6,7 @@ import {CLICK_DIALOG_ADD_PROJ,
         CLEAR_ERROR_DIALOG} from '../actions/UiActions'
 
 const initialState = {
-    title:"Название",
+    title:"Неизвестно",
     backButton:false,
     backButtonLink:"",
     addButton:false,

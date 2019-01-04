@@ -7,11 +7,16 @@ import LinearProgress from '@material-ui/core/LinearProgress';
 
 import {setUi} from '../actions/UiActions'
 import {getProject} from '../actions/ProjectActions'
+import { resolve } from 'url';
 
 class PageProject extends Component {
+  
+
   componentDidMount(){
-    this.props.getProjectAction()
-    this.props.setUiAction(this.props.project.name,true,"",false)
+    this.props.setUiAction(this.props.project.name,true,"d",false)
+    this.props.getProjectAction( () =>
+      this.props.setUiAction(this.props.project.name,true,"d",false)
+    )
   }
 
   render() {
@@ -45,7 +50,7 @@ const mapStateToProps = store => {
 const mapDispatchToProps = dispatch =>{
   return{
     setUiAction: (title,backButton,backButtonLink,addButton) => dispatch(setUi(title,backButton,backButtonLink,addButton)),
-    getProjectAction: () => dispatch(getProject())
+    getProjectAction: (callback) => dispatch(getProject(callback))
   }
 }
 

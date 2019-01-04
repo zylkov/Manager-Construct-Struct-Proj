@@ -79,9 +79,9 @@ class ShellUI extends Component {
 
 ShellUI.propTypes = {
   classes: PropTypes.object.isRequired,
-  title: PropTypes.string.isRequired,
+  title: PropTypes.string,
   add:PropTypes.bool,
-  addAction:PropTypes.func.isRequired,
+  addAction:PropTypes.func,
 };
 
 const mapStateToProps = store => {
