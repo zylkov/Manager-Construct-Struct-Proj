@@ -4,6 +4,18 @@ export const SET_BUFFER_DIALOG = "SET_BUFFER_DIALOG"
 export const CLEAR_BUFFER_DIALOG = "CLEAR_BUFFER_DIALOG"
 export const CHEAK_DIALOG_DATA = "CHEAK_DIALOG_DATA"
 export const CLEAR_ERROR_DIALOG = "CLEAR_ERROR_DIALOG"
+export const CHANGE_TABS="CHANGE_TABS"
+
+export function changeTabs(valueTab){
+    return dispatch =>{
+        dispatch({
+            type: CHANGE_TABS,
+            payload:{
+                valueActiveTab:valueTab
+            }
+        })
+    }
+}
 
 export function clearErrorDialog(){
     return dispatch =>{

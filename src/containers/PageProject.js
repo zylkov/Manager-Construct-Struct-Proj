@@ -8,6 +8,7 @@ import ShellUI from './ShellUI'
 import PaperSheet from '../components/PaperSheet'
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Grid from '@material-ui/core/Grid'
+import SimpleTabs from './SimpleTabs'
 
 import {setUi} from '../actions/UiActions'
 import {getProject} from '../actions/ProjectActions'
@@ -41,7 +42,8 @@ class PageProject extends Component {
         <LinearProgress/>:
         ''
       }
-
+      
+      { ui.valueActiveTab ===0 &&
         <Grid container  
         className={classes.root} 
         spacing={4} 
@@ -55,7 +57,7 @@ class PageProject extends Component {
             <PaperSheet title="Описание"  text={project.discription}/>
           </Grid>
         </Grid>
-
+      }
       </ShellUI> 
      </React.Fragment>
     )

@@ -9,8 +9,12 @@ import IconButton from '@material-ui/core/IconButton';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import Add from '@material-ui/icons/Add'
 import Back from '@material-ui/icons/KeyboardBackspace'
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
 
 import {connect} from 'react-redux'
+
+import {changeTabs} from '../actions/UiActions'
 
 
 const styles = theme => ({
@@ -37,6 +41,16 @@ const styles = theme => ({
 
 
 class ShellUI extends Component {
+constructor(props){
+  super(props)
+
+  this.handleChange = this.handleChange.bind(this)
+}
+
+  handleChange = (event, value) => {
+    this.props.changeTabsAction(value)
+  };
+  
   render(){
     const { classes, children, addAction, ui } = this.props;
 
@@ -56,6 +70,19 @@ class ShellUI extends Component {
               <Typography variant="h6" color="inherit"  className={classes.grow}>
                   {ui.title}
               </Typography>
+              { ui.tabs.length > 0 ?
+                <Tabs
+                style={{marginRight:100}}
+                className={classes.grow} 
+                value={ui.valueActiveTab}
+                onChange={this.handleChange}>
+                  {ui.tabs.map((name)=>
+                    <Tab label={name} />
+                  )}
+                </Tabs>
+                :""
+
+              }
               { ui.addButton ?
                   <IconButton color="inherit" onClick={()=>addAction()}>
                       <Add />
@@ -82,6 +109,7 @@ ShellUI.propTypes = {
   title: PropTypes.string,
   add:PropTypes.bool,
   addAction:PropTypes.func,
+  changeTabsAction:PropTypes.func,
 };
 
 const mapStateToProps = store => {
@@ -90,7 +118,12 @@ const mapStateToProps = store => {
   }
 }
 
+const mapDispatchToProps = dispatch =>{
+  return{
+    changeTabsAction: (valueTab) => dispatch(changeTabs(valueTab))
+  }
+}
 
 export default withStyles(styles)(
-  connect(mapStateToProps)(ShellUI)
+  connect(mapStateToProps,mapDispatchToProps)(ShellUI)
   );

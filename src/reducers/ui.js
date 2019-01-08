@@ -3,7 +3,8 @@ import {CLICK_DIALOG_ADD_PROJ,
         SET_BUFFER_DIALOG,
         CLEAR_BUFFER_DIALOG,
         CHEAK_DIALOG_DATA,
-        CLEAR_ERROR_DIALOG} from '../actions/UiActions'
+        CLEAR_ERROR_DIALOG,
+        CHANGE_TABS} from '../actions/UiActions'
 
 const initialState = {
     title:"Неизвестно",
@@ -12,11 +13,18 @@ const initialState = {
     addButton:false,
     openDialogAddProj: false,
     bufferDialog:{},
-    errorDialog:{}
+    errorDialog:{},
+    tabs:["Описание","Подпроекты"],
+    valueActiveTab:0
 }
 
 export function uiReducer(state=initialState, action){
     switch(action.type){
+        case CHANGE_TABS:
+            return{
+                ...state,
+                valueActiveTab: action.payload.valueActiveTab
+            }
         case CHEAK_DIALOG_DATA:
             return{
                 ...state,
