@@ -5,6 +5,7 @@ import {GET_PROJECT_REQUST,
 const initialState = {
     name:"Неизвестно",
     discription:"нет",
+    dateСreat:"-",
     isLoading: false,
     subproject:[],
     error:''
@@ -24,7 +25,8 @@ export function projectReducer(state=initialState, action){
                 error:"",
                 isLoading:false,
                 name: action.payload.name,
-                discription: action.payload.discription
+                discription: action.payload.discription,
+                dateСreat: action.payload.dateСreat
             }
         default:
             return state

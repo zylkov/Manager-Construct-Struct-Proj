@@ -1,13 +1,22 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
 
 
 import ShellUI from './ShellUI'
+import PaperSheet from '../components/PaperSheet'
 import LinearProgress from '@material-ui/core/LinearProgress';
+import Grid from '@material-ui/core/Grid'
 
 import {setUi} from '../actions/UiActions'
 import {getProject} from '../actions/ProjectActions'
-import { resolve } from 'url';
+
+const styles = theme => ({
+  root: {
+    flexGrow: 1
+  },
+});
 
 class PageProject extends Component {
   
@@ -20,7 +29,7 @@ class PageProject extends Component {
   }
 
   render() {
-    const {project, ui, clickDialogAddProjAction} = this.props
+    const {project, ui, clickDialogAddProjAction, classes } = this.props
     const onClickAdd = () => clickDialogAddProjAction()
     return (
       <React.Fragment>
@@ -32,12 +41,30 @@ class PageProject extends Component {
         <LinearProgress/>:
         ''
       }
-        
+
+        <Grid container  
+        className={classes.root} 
+        spacing={4} 
+        direction="column"
+        justify="center"
+        alignItems="center">
+          <Grid item >
+            <PaperSheet title="Дата создания"  text={project.dateСreat}/>
+          </Grid>
+          <Grid item >
+            <PaperSheet title="Описание"  text={project.discription}/>
+          </Grid>
+        </Grid>
+
       </ShellUI> 
      </React.Fragment>
     )
   }
 }
+
+PageProject.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
 
 const mapStateToProps = store => {
   console.log(store)
@@ -54,4 +81,4 @@ const mapDispatchToProps = dispatch =>{
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PageProject);
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(PageProject));
