@@ -5,6 +5,18 @@ export const CLEAR_BUFFER_DIALOG = "CLEAR_BUFFER_DIALOG"
 export const CHEAK_DIALOG_DATA = "CHEAK_DIALOG_DATA"
 export const CLEAR_ERROR_DIALOG = "CLEAR_ERROR_DIALOG"
 export const CHANGE_TABS="CHANGE_TABS"
+export const SET_ADD_BUTTON = "SET_ADD_BUTTON"
+
+export function setAddButton(seted){
+    return dispatch => {
+        dispatch({
+            type: SET_ADD_BUTTON,
+            payload:{
+                addButton:seted
+            }
+        })
+    }
+}
 
 export function changeTabs(valueTab){
     return dispatch =>{

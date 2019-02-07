@@ -23,17 +23,17 @@ export function getCards(){
                     {
                         id:1,
                         name:"Проект 1",
-                        discription:"Вообще кул проект отвечаю"
+                        discription:"Очень крутой проект"
                       },
                       {
                         id:2,
                         name:"Проект 2",
-                        discription:"Да нет вот этот самый наилудщий"
+                        discription:"Не очень"
                       },
                       {
                         id:3,
                         name:"Проект 3",
-                        discription:"В кратце - круть"
+                        discription:"Много много слов"
                       }
                 ]
             })
