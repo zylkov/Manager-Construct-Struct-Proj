@@ -5,7 +5,8 @@ import {CLICK_DIALOG_ADD_PROJ,
         CHEAK_DIALOG_DATA,
         CLEAR_ERROR_DIALOG,
         CHANGE_TABS,
-        SET_ADD_BUTTON} from '../actions/UiActions'
+        SET_ADD_BUTTON,
+        SET_TABS} from '../actions/UiActions'
 
 const initialState = {
     title:"Неизвестно",
@@ -21,6 +22,11 @@ const initialState = {
 
 export function uiReducer(state=initialState, action){
     switch(action.type){
+        case SET_TABS:
+            return{
+                ...state,
+                tabs: action.payload.tabs
+            }
         case SET_ADD_BUTTON:
             return{
                 ...state,

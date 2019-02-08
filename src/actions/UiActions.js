@@ -6,6 +6,9 @@ export const CHEAK_DIALOG_DATA = "CHEAK_DIALOG_DATA"
 export const CLEAR_ERROR_DIALOG = "CLEAR_ERROR_DIALOG"
 export const CHANGE_TABS="CHANGE_TABS"
 export const SET_ADD_BUTTON = "SET_ADD_BUTTON"
+export const SET_TABS = "SET_TABS"
+
+
 
 export function setAddButton(seted){
     return dispatch => {
@@ -13,6 +16,17 @@ export function setAddButton(seted){
             type: SET_ADD_BUTTON,
             payload:{
                 addButton:seted
+            }
+        })
+    }
+}
+
+export function setTabs(seted){
+    return dispatch => {
+        dispatch({
+            type: SET_TABS,
+            payload:{
+                tabs:seted
             }
         })
     }
