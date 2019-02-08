@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import PageGallery from './containers/PageGallery'
+import PageConstruct from './containers/PageConstruct'
 import PageProject from './containers/PageProject'
 import {store} from './store/configureStore'
 import {Provider} from 'react-redux'
@@ -9,7 +10,7 @@ import {Provider} from 'react-redux'
 
 ReactDOM.render(
     <Provider store={store}>
-        <PageProject />
+        <PageConstruct />
     </Provider>
     , document.getElementById('root'))
 
