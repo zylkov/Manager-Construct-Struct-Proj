@@ -10,7 +10,7 @@ import {Provider} from 'react-redux'
 
 ReactDOM.render(
     <Provider store={store}>
-        <PageConstruct />
+        <PageProject />
     </Provider>
     , document.getElementById('root'))
 
